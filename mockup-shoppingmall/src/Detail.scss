@@ -1,0 +1,16 @@
+$colorRed : #ff0000;
+
+.text-blue {
+    color: $colorRed;
+}
+
+.my-alert {
+    background: #eee;
+    padding: 20px;
+    border-radius: 5px;;
+    min-width: 500px;
+}
+
+.my-alert p {
+    margin-bottom: 0;
+}

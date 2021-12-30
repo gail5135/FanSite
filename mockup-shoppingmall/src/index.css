@@ -11,3 +11,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.jumbotron {
+  background-image: url('./BSECEUSlider.jpg');
+  padding: 15px 0px 5px 0px;
+  text-align: center;
+}
+
+.container {
+  text-align: center;
+}
