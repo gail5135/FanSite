@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react"
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import styled from "styled-components";
@@ -21,6 +22,7 @@ function Detail(props, idx) {
     let [inputData, setInputData] = useState([]);
 
     useEffect(() => {
+
         let timer = setTimeout(() => {
             setVisibleAlert(false);
         }, 2000);
@@ -49,6 +51,9 @@ function Detail(props, idx) {
                     <h4 className="pt-5">{selectedItem.title}</h4>
                     <p>{selectedItem.content}</p>
                     <p>{selectedItem.price}</p>
+
+                    <Info count={props.count}></Info>
+
                     <button className="btn btn-danger">주문하기</button> 
                     <button className="btn btn-danger" onClick={()=>{
                         history.goBack();
@@ -56,6 +61,12 @@ function Detail(props, idx) {
                 </div>
             </div>
         </div> 
+    )
+}
+
+function Info (props){
+    return (
+        <p>재고 : {props.count}</p>
     )
 }
 

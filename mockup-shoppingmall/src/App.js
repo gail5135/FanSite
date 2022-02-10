@@ -2,12 +2,14 @@ import React, {useState} from 'react'
 import { Container, Nav, Navbar, NavDropdown, Button} from 'react-bootstrap';
 import Data from './data.js'
 import Detail from './Detail.js';
+import axios from 'axios';
 
 import { Link, Route, Switch } from 'react-router-dom'
 
 function App() {
 
   let [shoes, setShoes] = useState(Data)
+  let [count, setCount] = useState(0)
 
   return (
     <div className="App">
@@ -32,34 +34,47 @@ function App() {
       </Navbar>
 
       <Switch>
-      <Route exact path='/'>
-        <div className="mt-4 p-5 text-black rounded text-center jumbotron">
-          <h1>20% Season Off</h1>
-          <p>
-            This is a simple hero unit, a simple jumbotron-style component for calling
-            extra attention to featured content or information.
-          </p>
-          <p>
-            <Button variant="primary">Learn more</Button>{' '}
-          </p>
-        </div>
-
-        <div className='container'>
-          <div className='row'>
-            {
-              shoes.map((ele, idx) => {
-                return (
-                  <Card shoes={ele} idx={idx} key={ele.id}/>
-                )
-              })
-            }
+        <Route exact path='/'>
+          <div className="mt-4 p-5 text-black rounded text-center jumbotron">
+            <h1>20% Season Off</h1>
+            <p>
+              This is a simple hero unit, a simple jumbotron-style component for calling
+              extra attention to featured content or information.
+            </p>
+            <p>
+              <Button variant="primary">Learn more</Button>{' '}
+            </p>
           </div>
-        </div>
-      </Route>
 
-      <Route path='/detail/:id' >
-        <Detail shoes={shoes}/>
-      </Route>
+          <div className='container'>
+            <div className='row'>
+              {
+                shoes.map((ele, idx) => {
+                  return (
+                    <Card shoes={ele} idx={idx} key={ele.id}/>
+                  )
+                })
+              }
+            </div>
+            <button className='btn btn-primary' onClick={()=>{
+
+              
+
+              axios.get('https://codingapple1.github.io/shop/data2.json')
+              .then((result)=>{
+                // setShoes([...shoes, ...result.data])
+                setShoes(shoes.concat(result.data))
+              })
+              .catch((error)=>{
+                console.log(error)
+              })
+            }}>더보기</button>
+          </div>
+        </Route>
+
+        <Route path='/detail/:id' >
+          <Detail shoes={shoes} count={count}/>
+        </Route>
       </Switch>
     </div>
   );
